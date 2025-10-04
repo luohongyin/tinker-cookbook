@@ -7,7 +7,7 @@ from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
 
 
 def build_config() -> train.Config:
-    model_name = "meta-llama/Llama-3.1-8B"
+    model_name = "Qwen/Qwen3-30B-A3B-Base"
     renderer_name = model_info.get_recommended_renderer_name(model_name)
     common_config = ChatDatasetBuilderCommonConfig(
         model_name_for_tokenizer=model_name,
@@ -16,15 +16,18 @@ def build_config() -> train.Config:
         batch_size=128,
         train_on_what=TrainOnWhat.ALL_ASSISTANT_MESSAGES,
     )
-    dataset = chat_datasets.NoRobotsBuilder(common_config=common_config)
-    if 0:  # To swap in your own dataset:
-        dataset = FromConversationFileBuilder(
-            common_config=common_config, file_path="/path/to/your/dataset.jsonl"
-        )
-        # ^^^ Create a dataset from a JSONL file in the same format as
-        # example-data/conversations.jsonl
+    # dataset = chat_datasets.NoRobotsBuilder(common_config=common_config)
+    
+    # if 0:  # To swap in your own dataset:
+    dataset = FromConversationFileBuilder(
+        common_config=common_config, 
+        file_path="/Users/hongyinluo/Desktop/tinker-cookbook/workspace/data/tim.jsonl"
+    )
+    # ^^^ Create a dataset from a JSONL file in the same format as
+    # example-data/conversations.jsonl
+        
     return train.Config(
-        log_path="/tmp/tinker-examples/sl_basic",
+        log_path="/Users/hongyinluo/Desktop/tinker-cookbook/workspace/log",
         model_name=model_name,
         dataset_builder=dataset,
         learning_rate=2e-4,

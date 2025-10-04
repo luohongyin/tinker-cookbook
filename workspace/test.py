@@ -10,5 +10,3 @@ base_model = "Qwen/Qwen3-30B-A3B-Base"
 training_client = service_client.create_lora_training_client(
     base_model=base_model
 )
-
-training_data = json.load(open('data/tim_long_box_processed.json'))

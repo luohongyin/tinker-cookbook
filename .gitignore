@@ -1,3 +1,5 @@
 *.pyc
 .vscode
 workspace/data/*.json
+workspace/data/*.jsonl
+workspace/log
